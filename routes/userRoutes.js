@@ -23,12 +23,12 @@ Router.get('/getData',auth,(req,res)=>{
  Router.post('/signup',async (req,res)=>{
     const data = req.body
     if(!data.email || !data.password){
-            return res.send({error:"please fill with email and Password"})
+            return res.send({success:false,msg:"please fill with email and Password"})
         
         }
         const isExist =user.find(elem=> elem.email===data.email)
         if(isExist){
-            return res.send({error:"user already exist"})
+            return res.send({success:false,msg:"user already exist"})
         
         }
         
@@ -45,7 +45,7 @@ Router.get('/getData',auth,(req,res)=>{
  Router.post('/login',(req,res)=>{ 
     const data = req.body  
     if(!data.email || !data.password){
-        return res.send({error:"please fill with email and Password"})
+        return res.send({success:false,msg:"please fill with email and Password"})
 
     }
     let userAccount  = user.find(elem=>elem.email == data.email)
@@ -58,13 +58,13 @@ Router.get('/getData',auth,(req,res)=>{
                 res.json({success:true,email:user.email,token:token, msg:`${data.email} Login Successfully`})
 
             }
-            return res.send({error:"Password is incorrect"})
+            return res.send({success:false,msg:"Password is incorrect"})
 
 
 
      }
      else{
-        res.json({error:"Please Signup first"})
+        res.json({success:false,msg:"Please Signup first"})
      }
    })
 
